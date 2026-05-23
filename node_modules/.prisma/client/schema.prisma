@@ -1,0 +1,44 @@
+// prisma/schema.prisma
+// Event Management System - Irfan Maulan Saputra (24090107)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model CategoryEvent {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  events Event[]
+
+  @@map("category_events")
+}
+
+model Pembicara {
+  id        Int     @id @default(autoincrement())
+  name      String
+  expertise String
+  bio       String
+  events    Event[]
+
+  @@map("pembicara")
+}
+
+model Event {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime
+  location    String
+  categoryId  Int
+  pembicaraId Int
+  category    CategoryEvent @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  pembicara   Pembicara     @relation(fields: [pembicaraId], references: [id], onDelete: Cascade)
+
+  @@map("events")
+}
