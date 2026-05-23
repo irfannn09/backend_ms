@@ -21,7 +21,7 @@
     "dotenv": "^16.3.1",
     "prisma": "^5.7.0"
   },
-  "devDependencies": {
+  "ddependencies": {
     "typescript": "^5.3.2",
     "ts-node-dev": "^2.0.0",
     "@types/cors": "^2.8.17",
